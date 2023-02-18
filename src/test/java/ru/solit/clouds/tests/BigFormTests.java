@@ -1,11 +1,10 @@
-package ru.solit.clouds;
+package ru.solit.clouds.tests;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.image;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -25,15 +24,19 @@ public class BigFormTests {
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("Sidorov");
         $("#userEmail").setValue("alex@yandex.ru");
+
         $(byText("Male")).click();
         $("#userNumber").setValue("1234567890");
         $("#subjectsInput").setValue("Maths").pressEnter();
+
+        //Select date from Calendar
         $(".react-datepicker-wrapper").click();
         $(".react-datepicker__year-select").selectOption("2002");
         $(".react-datepicker__month-select").selectOption("March");
         $(".react-datepicker__month").$(byText("13")).click();
+
         $(byText("Music")).click();
-        $("#uploadPicture").uploadFile(new File("src/test/java/ru/solit/clouds/image.png"));
+        $("#uploadPicture").uploadFile(new File("src/resources/img/image.png"));
         $("#currentAddress").setValue("Some address");
         $("#state").click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
