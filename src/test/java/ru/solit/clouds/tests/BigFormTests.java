@@ -1,7 +1,5 @@
 package ru.solit.clouds.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 
@@ -10,11 +8,6 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class BigFormTests {
-
-    @BeforeAll
-    static void beforeAll(){
-        Configuration.startMaximized=true;
-    }
 
     @Test
     void fillFormTest(){
