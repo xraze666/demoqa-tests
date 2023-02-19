@@ -1,17 +1,15 @@
 package ru.solit.clouds.tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import ru.solit.clouds.pages.RegistrationPage;
-
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class BigFormTests extends TestBase{
 
     RegistrationPage registrationPage = new RegistrationPage();
+    Faker faker = new Faker();
 
     @Test
     void fillFormTest(){
@@ -20,27 +18,26 @@ public class BigFormTests extends TestBase{
         registrationPage.openPage();
 
         //Fill user base info
-        registrationPage.typeFirstName("Alex")
-                        .typeLastName("Sidorov")
+        registrationPage.typeFirstName(faker.name().firstName())
+                        .typeLastName(faker.name().lastName())
                         .typeUserEmail("alex@yandex.ru")
                         .typePhoneNumber("+712938475029")
                         .typeSubject("Maths")
                         .typeHobbies("Music")
                         .typeUserAddress("Some address")
-                        .typeGender("Male")
-                        ;
+                        .loagImages("src/test/resources/img/image.png")
+                        .typeGender("Male");
 
         //Select date from Calendar
         registrationPage.calendar.setDate("19", "March", "2023");
 
-        $("#uploadPicture").uploadFile(new File("src/test/resources/img/image.png"));
-
+        //Select State and City from component
         registrationPage.stateAndCity.setStateAndCity("Rajasthan", "Jaipur");
 
-        $("#submit").click();
+        //Submit
+        registrationPage.submitForm();
 
         //Check submit form
-        //$(".table tbody tr[0]").shouldHave(text("Alex"));
         $(".table-responsive").shouldHave(
                 text("Alex Sidorov"),
                 text("13 March,2002"),
