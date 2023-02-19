@@ -25,18 +25,17 @@ public class BigFormTests extends TestBase{
                         .typeUserEmail("alex@yandex.ru")
                         .typePhoneNumber("+712938475029")
                         .typeSubject("Maths")
-                        .typeGender("Male");
+                        .typeHobbies("Music")
+                        .typeUserAddress("Some address")
+                        .typeGender("Male")
+                        ;
 
         //Select date from Calendar
         registrationPage.calendar.setDate("19", "March", "2023");
 
-        $(byText("Music")).click();
         $("#uploadPicture").uploadFile(new File("src/test/resources/img/image.png"));
-        $("#currentAddress").setValue("Some address");
-        $("#state").click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Delhi")).click();
+
+        registrationPage.stateAndCity.setStateAndCity("Rajasthan", "Jaipur");
 
         $("#submit").click();
 

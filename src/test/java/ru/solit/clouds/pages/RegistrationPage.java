@@ -3,6 +3,7 @@ package ru.solit.clouds.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.solit.clouds.pages.components.CalendarComponent;
+import ru.solit.clouds.pages.components.StateAndCityComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -12,6 +13,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class RegistrationPage {
     private final String FORM_TITLE = "Student Registration Form";
     public CalendarComponent calendar = new CalendarComponent();
+    public StateAndCityComponent stateAndCity = new StateAndCityComponent();
 
     private SelenideElement
                     formTitle = $(".practice-form-wrapper"),
@@ -20,7 +22,9 @@ public class RegistrationPage {
                     userEmailInput =  $("#userEmail"),
                     genderInput = $("#genterWrapper"),
                     phoneNumber = $("#userNumber"),
-                    subjectsInput = $("#subjectsInput");
+                    subjectsInput = $("#subjectsInput"),
+                    hobbiesInput = $("#hobbiesWrapper"),
+                    userCurrentAddress = $("#currentAddress");
 
     public void openPage(){
         open("/automation-practice-form");
@@ -54,6 +58,18 @@ public class RegistrationPage {
 
     public RegistrationPage typeSubject(String subject){
         subjectsInput.setValue(subject).pressEnter();
+        //return this for create chains
+        return this;
+    }
+
+    public RegistrationPage typeUserAddress(String address){
+        userCurrentAddress.setValue(address);
+        //return this for create chains
+        return this;
+    }
+
+    public RegistrationPage typeHobbies(String hobby){
+        hobbiesInput.$(byText(hobby)).click();
         //return this for create chains
         return this;
     }
