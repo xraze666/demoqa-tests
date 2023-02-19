@@ -1,26 +1,31 @@
 package ru.solit.clouds.tests;
 
 import org.junit.jupiter.api.Test;
+import ru.solit.clouds.pages.RegistrationPage;
+
 import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class BigFormTests {
+public class BigFormTests extends TestBase{
+
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void fillFormTest(){
 
         //Fill the form
-        open("https://demoqa.com/automation-practice-form");
-        $("#firstName").setValue("Alex");
-        $("#lastName").setValue("Sidorov");
-        $("#userEmail").setValue("alex@yandex.ru");
+        registrationPage.openPage();
 
-        $(byText("Male")).click();
-        $("#userNumber").setValue("1234567890");
-        $("#subjectsInput").setValue("Maths").pressEnter();
+        //Fill user base info
+        registrationPage.typeFirstName("Alex")
+                        .typeLastName("Sidorov")
+                        .typeUserEmail("alex@yandex.ru")
+                        .typePhoneNumber("+712938475029")
+                        .typeSubject("Maths")
+                        .typeGender("Male");
 
         //Select date from Calendar
         $(".react-datepicker-wrapper").click();
@@ -29,7 +34,7 @@ public class BigFormTests {
         $(".react-datepicker__month").$(byText("13")).click();
 
         $(byText("Music")).click();
-        $("#uploadPicture").uploadFile(new File("src/resources/img/image.png"));
+        $("#uploadPicture").uploadFile(new File("src/test/resources/img/image.png"));
         $("#currentAddress").setValue("Some address");
         $("#state").click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
