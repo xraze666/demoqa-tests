@@ -1,9 +1,10 @@
 package ru.solit.clouds.pages;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.solit.clouds.pages.components.CalendarComponent;
 import ru.solit.clouds.pages.components.StateAndCityComponent;
+
+import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -24,11 +25,17 @@ public class RegistrationPage {
                     phoneNumber = $("#userNumber"),
                     subjectsInput = $("#subjectsInput"),
                     hobbiesInput = $("#hobbiesWrapper"),
-                    userCurrentAddress = $("#currentAddress");
+                    userCurrentAddress = $("#currentAddress"),
+                    uploadPicture = $("#uploadPicture"),
+                    submitButton = $("#submit");
 
     public void openPage(){
         open("/automation-practice-form");
         formTitle.shouldHave(text(FORM_TITLE));
+    }
+
+    public void submitForm(){
+        submitButton.click();
     }
 
     public RegistrationPage typeFirstName(String value) {
@@ -74,7 +81,14 @@ public class RegistrationPage {
         return this;
     }
 
+    public RegistrationPage loagImages(String pathToImage){
+       uploadPicture.uploadFile(new File(pathToImage));
+        //return this for create chains
+        return this;
+    }
+
     public void typeGender(String gender){
         genderInput.$(byText(gender)).click();
     }
+
 }
