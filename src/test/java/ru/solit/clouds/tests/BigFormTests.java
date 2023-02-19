@@ -28,10 +28,7 @@ public class BigFormTests extends TestBase{
                         .typeGender("Male");
 
         //Select date from Calendar
-        $(".react-datepicker-wrapper").click();
-        $(".react-datepicker__year-select").selectOption("2002");
-        $(".react-datepicker__month-select").selectOption("March");
-        $(".react-datepicker__month").$(byText("13")).click();
+        registrationPage.calendar.setDate("19", "March", "2023");
 
         $(byText("Music")).click();
         $("#uploadPicture").uploadFile(new File("src/test/resources/img/image.png"));

@@ -2,6 +2,7 @@ package ru.solit.clouds.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import ru.solit.clouds.pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -10,6 +11,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationPage {
     private final String FORM_TITLE = "Student Registration Form";
+    public CalendarComponent calendar = new CalendarComponent();
 
     private SelenideElement
                     formTitle = $(".practice-form-wrapper"),
